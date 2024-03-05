@@ -13,7 +13,9 @@ document.addEventListener('DOMContentLoaded', function () {
   // Add event listener to wait for the video to be loaded
   video.addEventListener('loadedmetadata', function() {
     // Set duration property for the video
-    video.duration = video.duration || 60.08; // Set a default value if duration is NaN
+    if (isNaN(video.duration)) {
+      video.duration = 60.08; // Set a default value if duration is NaN
+    }
 
     // Update progress bar once the video metadata is loaded
     updateProgress();
@@ -49,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Function to update the playback speed
     function updatePlaybackSpeed() {
-      video.playbackRate = playbackSpeed.value;
+      video.playbackRate = parseFloat(playbackSpeed.value);
     }
 
     // Function to skip forward or backward
